@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Our superheroes - JSON parsed</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Faster+One" rel="stylesheet"> 
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+
+      <header>
+
+      </header>
+
+      <section>
+
+      </section>
+
+    <script>
+    // Grab references to <header> and <section> elements and store into variables
+    const header = document.querySelector('header');
+    const section = document.querySelector('section');
+
+    // Store URL into variable requestURL
+    const requestURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
+
+     // Create new request object from XMLHttpRequest constructor
+    const request = new XMLHttpRequest();
+
+     // Open new request using open() method
+        // pass GET method to retrieve data, and URL to make request to 
+    request.open('GET', requestURL);
+
+     // Setting responseType to rawJSON text (instead of JSON) so server knows to return JSON
+       // send request with send() method
+    request.responseType = 'text';
+    request.send();
+
+    // Wait for response to return from server and dealing with it
+      // Event handler when response is returned successfully
+    request.onload = function() {
+      // Store response to our request into variable superHeroesText which contains string from the response
+       // Pass that object to 2 function calls, to fill <header> with data and to create info card for each hero on team and insert into <section>
+      const superHeroesText = request.response;
+       // use parse() to convert the raw JSON text to an object
+      const superHeroes = JSON.parse(superHeroesText);
+      populateHeader(superHeroes);
+      showHeroes(superHeroes);
+    }
+
+     // Retrieved JSON data, convert into object = jsonObj
+    function populateHeader(jsonObj) {
+       // Create <h1> element and set its text content to equal squadName and append to header     
+      var myH1 = document.createElement('h1');
+      myH1.textContent = jsonObj['squadName'];
+      header.appendChild(myH1);
+
+       // Create <p> element and set its text content to equal homeTown and append to paragraph
+      var myPara = document.createElement('p');
+      myPara.textContent = 'Hometown: ' + jsonObj['homeTown'] + ' // Formed: ' + jsonObj['formed'];
+      header.appendChild(myPara);
+    }
+
+     // Create and display superhero cards
+    function showHeroes(jsonObj) {
+       // Store members property of object into showHeroes variable
+      var heroes = jsonObj['members'];
+          
+      for (var i = 0; i < heroes.length; i++) {
+        var myArticle = document.createElement('article');
+        var myH2 = document.createElement('h2');
+        var myPara1 = document.createElement('p');
+        var myPara2 = document.createElement('p');
+        var myPara3 = document.createElement('p');
+        var myList = document.createElement('ul');
+
+        myH2.textContent = heroes[i].name;
+        myPara1.textContent = 'Secret identity: ' + heroes[i].secretIdentity;
+        myPara2.textContent = 'Age: ' + heroes[i].age;
+        myPara3.textContent = 'Superpowers:';
+            
+        var superPowers = heroes[i].powers;
+        for (var j = 0; j < superPowers.length; j++) {
+          var listItem = document.createElement('li');
+          listItem.textContent = superPowers[j];
+          myList.appendChild(listItem);
+        }
+
+        myArticle.appendChild(myH2);
+        myArticle.appendChild(myPara1);
+        myArticle.appendChild(myPara2);
+        myArticle.appendChild(myPara3);
+        myArticle.appendChild(myList);
+
+        section.appendChild(myArticle);
+      }
+    }
+
+    
+    </script>
+  </body>
+</html>
