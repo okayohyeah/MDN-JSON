@@ -1,0 +1,5 @@
+LESSON FROM 
+https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON
+
+on line 52 of index.html
+in lesson, Populating the Header

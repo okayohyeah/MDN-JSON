@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Our superheroes</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Faster+One" rel="stylesheet"> 
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+
+      <header>
+
+      </header>
+
+      <section>
+
+      </section>
+
+    <script>
+    // Grab references to <header> and <section> elements and store into variables
+    const header = document.querySelector('header');
+    const section = document.querySelector('section');
+
+    // Store URL into variable requestURL
+    const requestURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
+
+     // Create new request object from XMLHttpRequest constructor
+    const request = new XMLHttpRequest();
+
+     // Open new request using open() method
+        // pass GET method to retrieve data, and URL to make request to 
+    request.open('GET', requestURL);
+
+     // Setting responeType to JSON so server knows to return JSON
+       // send request with send() method
+    request.responeType = 'json';
+    request.send();
+
+    // Wait for response to return from server and dealing with it
+      // Event handler when response is returned successfully
+    request.onload = function() {
+      // Store response to our request into variable superHeroes which contains object based on JSON
+       // Pass that object to 2 function calls, to fill <header> with data and to create info card for each hero on team and insert into <section>
+      const superHeroes = request.response;
+      populateHeader(superHeroes);
+      showHeroes(superHeroes);
+    }
+
+     // Retrieved JSON data, convert into object = jsonObj
+    function populateHeader(jsonObj) {
+       
+      var myH1 = document.createElement('h1');
+      myH1.textContent = jsonObj['squadName'];
+      header.appendChild(myH1);
+
+    var myPara = document.createElement('p');
+      myPara.textContent = 'Hometown: ' + jsonObj['homeTown'] + ' // Formed: ' + jsonObj['formed'];
+      header.appendChild(myPara);
+    }
+    
+    </script>
+  </body>
+</html>
