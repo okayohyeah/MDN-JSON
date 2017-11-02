@@ -34,7 +34,7 @@
         // pass GET method to retrieve data, and URL to make request to 
     request.open('GET', requestURL);
 
-     // Setting responseType to rawJSON text (instead of JSON) so server knows to return JSON
+     // Setting responseType to rawJSON string(instead of JSON) so server knows to return JSON
        // send request with send() method
     request.responseType = 'text';
     request.send();
@@ -45,7 +45,7 @@
       // Store response to our request into variable superHeroesText which contains string from the response
        // Pass that object to 2 function calls, to fill <header> with data and to create info card for each hero on team and insert into <section>
       const superHeroesText = request.response;
-       // use parse() to convert the raw JSON text to an object
+       // use parse() to convert the raw JSON string to an object
       const superHeroes = JSON.parse(superHeroesText);
       populateHeader(superHeroes);
       showHeroes(superHeroes);
