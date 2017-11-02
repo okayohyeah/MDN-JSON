@@ -34,9 +34,9 @@
         // pass GET method to retrieve data, and URL to make request to 
     request.open('GET', requestURL);
 
-     // Setting responeType to JSON so server knows to return JSON
+     // Setting responseType to JSON so server knows to return JSON
        // send request with send() method
-    request.responeType = 'json';
+    request.responseType = 'json';
     request.send();
 
     // Wait for response to return from server and dealing with it
@@ -51,15 +51,16 @@
 
      // Retrieved JSON data, convert into object = jsonObj
     function populateHeader(jsonObj) {
-       
+       // Create <h1> element and set its text content to equal squadName and append to header     
       var myH1 = document.createElement('h1');
       myH1.textContent = jsonObj['squadName'];
       header.appendChild(myH1);
 
-    var myPara = document.createElement('p');
+       // Create <p> element and set its text content to equal homeTown and append to paragraph
+      var myPara = document.createElement('p');
       myPara.textContent = 'Hometown: ' + jsonObj['homeTown'] + ' // Formed: ' + jsonObj['formed'];
       header.appendChild(myPara);
-    }
+  }
     
     </script>
   </body>
